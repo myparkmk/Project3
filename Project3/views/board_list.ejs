@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>배탈의 민족 Administrator </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin">Administrator</a>
+      </div>
+      <ul class="nav navbar-nav">
+          <li class="active2"><a href="/admin">회원 관리</a></li> 
+          <li class="active2"><a data-toggle="pill" href="#notice" style="color:black" onclick="location.href='/admin_ceo';">업소 관리</button></a></li>
+          <li class="active"><a data-toggle="pill" href="/board/board_list/1" style="color:black" onclick="location.href='/board';">공지사항</a></li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container">         
+
+    <div class="tab-content">
+       <hr>
+       <table class="table table-striped">
+        <h2>공지사항</h2>
+        <hr>
+        <a href="/board/write">공지사항 작성하기</a>
+        <hr>
+        <thead>
+         <tr>
+           <th>제목</th>
+           <th>작성자</th>
+       </tr>
+   </thead>
+   <tbody>
+    <%
+    for(var i = 0; i < rows.length; i++)
+    {
+    var oneItem = rows[i];
+    %>
+    <tr>
+        <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.title%></a></td>
+        <td><%=oneItem.creator_id%></td>
+    </tr>
+    <%                    
+}
+%>
+</div>
+</div>
+</div>
+</div>
+</body>        
+</table>
+</html>
+

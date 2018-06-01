@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Round About - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <div class="text-right">
+                <div class="btn-group" style="background-color:white-space">
+                    <div col-md-3>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" onclick="location.href='/login';">로그인</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/signup';">회원가입</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/service';">고객센터</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+            <a href="/ceo">
+                    <img class="img-responsive left-block" src="/images/ceo/ceo_main.jpg" alt="logo" width="200" height="200">
+                </a>
+                <a href="/">
+                    <img class="img-responsive center-block" src="/images/main_logo.jpg" alt="logo">
+                </a>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <!-- Text박스로 업소명 입력 및 위치 입력 코드 추가해야됨 -->
+        <div class="input-group srch">
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="동명을 입력해주세요">
+            <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
+            </span>
+
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="업소명을 검색해주세요">
+            <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
+            </span>
+        </div>
+        <br>
+        <br>
+        <!-- Centered Tabs -->
+        <ul class="nav nav-tabs nav-justified">
+            <li>
+                <a href="/list/pizza" class="btn btn-secondary "> <img class="img-circle img-responsive img-center" src="/images/Pizza.jpg" width="100px" height="100px" alt="">피자</a>
+            </li>
+            <li>
+                <a href="/list/chicken" class="btn btn-secondary "><img class="img-circle img-responsive img-center" src="/images/Chicken.jpg" width="100px" height="100px" alt="">치킨</a>
+            </li>
+            <li>
+                <a href="/list/ilsik" class="btn btn-secondary "><img class="img-circle img-responsive img-center" src="/images/Chobab.jpg" width="100px" height="100px" alt="">일식</a>
+            </li>
+            <li>
+                <a href="/list/bunsik" class="btn btn-secondary "> <img class="img-circle img-responsive img-center" src="/images/Bunsick.jpg" width="100px" height="100px" alt="">분식</a>
+            </li>
+            <li>
+                <a href="/list/joongsik" class="btn btn-secondary "><img class="img-circle img-responsive img-center" src="/images/Zazang.jpg" width="100px" height="100px" alt="">중식</a>
+            </li>
+            <li>
+                <a href="/list/hamburger" class="btn btn-secondary "><img class="img-circle img-responsive img-center" src="/images/Hamburger.jpg" width="100px" height="100px" alt="">햄버거</a>
+            </li>
+        </ul>
+        <br>
+        <br>
+
+
+        <div class="container">
+            <ul class="nav nav-pills nav-justified">
+                <li><a data-toggle="pill" href="#service"  onclick="location.href='/service';">서비스소개</a></li>
+                <li class="active"><a data-toggle="pill" href="#notice" style="color:black" onclick="location.href='/service_board';">공지사항</button></a></li>
+                <li><a data-toggle="pill" href="#faq" style="color:black"  onclick="location.href='/service';">자주묻는질문</a></li>
+                <li><a data-toggle="pill" href="#qna" style="color:black"  onclick="location.href='/service';">문의하기</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="service" class="tab-pane fade">
+                    <h2>서비스소개</h2>
+                    <hr>
+                     <img class="img-responsive center-block" src="/images/service_intro.jpg" alt="logo">
+                </div>
+
+                <div id="notice" class="tab-pane fade in active">
+                                   
+                        <table class="table table-striped">
+                            <h2>공지사항</h2>
+                            <hr>
+                            <hr>
+                            <thead>
+                               <tr>
+                                 <th>제목</th>
+                                 <th>작성자</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                             <%
+                                for(var i = 0; i <rows.length; i++)
+                                {
+                                    var oneItem = rows[i];
+                            %>
+                                    <tr>
+                                        <td><a href="/service_board/service_read/<%=oneItem.idx%>"><%=oneItem.title%></a></td>
+                                        <td><%=oneItem.creator_id%></td>
+                                    </tr>
+                            <%                    
+                                }
+                            %>
+                        </body>        
+                        </table>
+                </div>
+
+                <div id="faq" class="tab-pane fade">
+                    <h2>자주묻는질문</h2>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>작성자</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>게시물1</td>
+                                <td>나</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="qna" class="tab-pane fade">
+                    <h2>문의하기</h2>
+                    <hr>
+
+                  <table class="table table-striped">
+                    <form class="" action="/service" method="post">
+                  <tr>
+                    <td>제목</td>
+                    <td><input type="text" name="title" size="60" value=""></td>
+                  </tr>
+                  <tr>
+                    <td>분류</td>
+                    <td><input type="hidden" name="name" value="">
+                          <select name="type">
+                            <option value="회원가입">회원가입</option>
+                            <option value="이용문의">이용문의</option>
+                            <option value="리뷰관리">리뷰관리</option>
+                            <option value="불편문의">불편문의</option>
+                            <option value="기타">기타</option>
+                          </select>
+                    </td>
+                  </tr>
+                  <tr>
+                  <td>문의내용</td>
+                  <td><textarea name = "contents" cols = "65" rows ="10" required></textarea></td>
+                  </tr>
+                  <tr>
+                    <center>
+                      <td colspan="3"><button type="submit" name="name" value="">제출하기</input></td>
+                    </center>
+                  </tr>
+                  </table>
+                  </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Software Engineering Project </p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="/bootstrap-3.3.6-dist/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+

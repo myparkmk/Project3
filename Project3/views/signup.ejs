@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/javascripts/jquery-1.12.3.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>배탈의 민족</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        $(function() {
+
+            $("#btnJoin").click(
+                function() {
+
+                    if ($("#id").val() == "") {
+                        alert("아이디를 꼭 입력하세요");
+                        $("#id").focus();
+                        return;
+                    }
+
+                    if ($("#passwd").val() == "") {
+                        alert("비밀번호를 꼭 입력하세요");
+                        $("#passwd").focus();
+                        return;
+                    }
+
+                    if ($("#email").val() == "") {
+                        alert("이메일을 꼭 입력하세요");
+                        $("#email").focus();
+                        return;
+                    }
+
+                    if ($("#tel2").val() == "") {
+                        alert("전화번호 두번째 자리를 확인해 주세요");
+                        $("#tel2").focus();
+                        return;
+                    }
+
+                    if ($("#tel3").val() == "") {
+                        alert("전화번호 세번째 자리를 확인해 주세요");
+                        $("#tel3").focus();
+                        return;
+                    }
+
+                    var tel = $("#tel1").val() + '-' + $("#tel2").val() + '-' + $("#tel3").val();
+                    $("#tel").val(tel);
+
+                    if ($("#address").val() == "") {
+                        alert("주소를 꼭 입력해 주세요");
+                        $("#address").focus();
+                        return;
+                    }
+
+                    if ($("#birth").val() == "") {
+                        alert("생일을 꼭 입력하세요");
+                        $("#birth").focus();
+                        return;
+                    }
+
+                    if ($("#birth").val().length != 8) {
+                        alert("생일은 8글자로 입력해 주세요");
+                        $("#birth").focus();
+                        return;
+                    }
+
+                    if (isNaN($("#birth").val())) {
+                        alert("생일은 숫자만 입력해 주세요");
+                        $("#birth").focus();
+                        return;
+                    }
+
+                    $("#joinForm").submit();
+                }
+            );
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="text-right">
+                <div class="btn-group" style="background-color:white-space">
+                    <div col-md-3>
+                        <span class="input-group-btn">
+                          <a href="/login"><button type="button" class="btn btn-default">로그인</button></a>
+                          <a href="/signup"><button type="button" class="btn btn-default">회원가입</button></a>
+                          <a href="/service"><button type="button" class="btn btn-default">고객센터</button></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/">
+                    <img class="img-responsive center-block" src="/images/main_logo.jpg" alt="logo">
+                </a>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <!-- Text박스로 업소명 입력 및 위치 입력 코드 추가해야됨 -->
+
+    </div>
+    <br>
+    <br>
+    <!-- Centered Tabs -->
+
+    <br><br>
+
+    <div class="container">
+        <h1 style="color: #5e9ca0;">회원가입</h1>
+        <br>
+        <br>
+        <br>
+        <form id="joinForm" action='/signup' method='post'>
+            <table class="table table-striped" width="400">
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <input type="text" name="user_id" id="user_id" size="12" maxLength="12">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <input type="password" name="passwd" id="passwd" size="12" maxLength="12">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <input type="text" name="name" id="name" size="10" maxLength="10">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input type="email" name="email" id="email" size="30" maxLength="50">
+                    </td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input type="hidden" name="tel" id="tel">
+                        <select name="tel1" id="tel1">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
+                        </select>
+
+                        <input type="text" name="tel2" id="tel2" size="4" maxLength="4">
+                        <input type="text" name="tel3" id="tel3" size="4" maxLength="4">
+                    </td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        <input type="text" id="address" name="address" size="30" maxlength="50">
+                    </td>
+                </tr>
+                <tr>
+                    <th>직업</th>
+                    <td>
+                        <select name="job" id="job">
+                            <option value="학생">학생</option>
+                            <option value="직장인">직장인</option>
+                            <option value="주부">주부</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>성별</th>
+                    <td>
+                        <input type="radio" name="gender" value="남" checked="checked">남
+                        <input type="radio" name="gender" value="여">여
+                    </td>
+                </tr>
+                <tr>
+                    <th>생일</th>
+                    <td>
+                        <input type="text" name="birth" id="birth" size="8" maxLength="8">YYYYMMDD</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <input type="submit" class="btn btn-success" id="btnJoin" name="join" value="가입">
+                            <input type="reset" class="btn btn-danger" name="cancel" value="취소">
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Software Engineering Project </p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
+</body>
+
+</html>
