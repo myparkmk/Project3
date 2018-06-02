@@ -70,12 +70,12 @@
         </div>
 
         <div class="input-group srch">
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="동명을 입력해주세요">
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연 장소를 입력해주세요 (읍/면/동/리)">
             <span class="input-group-btn">
               <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
             </span>
 
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="업소명을 검색해주세요">
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연팀 이름을 입력해주세요">
             <span class="input-group-btn">
               <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
             </span>
@@ -86,22 +86,16 @@
     <!-- Centered Tabs -->
     <ul class="nav nav-tabs nav-justified">
         <li>
-            <a href="/list/피자" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/공연.jpg" width="100px" height="100px" alt="" id="pizza"></a>
+            <a href="/list/연극" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/연극.jpg" width="100px" height="100px" alt="" id="pizza"></a>
         </li>
         <li>
-            <a href="/list/치킨" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chicken.jpg" width="100px" height="100px" alt="" id="chicken"></a>
+            <a href="/list/뮤지컬" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/뮤지컬.jpg" width="100px" height="100px" alt="" id="chicken"></a>
         </li>
         <li>
-            <a href="/list/일식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chobab.jpg" width="100px" height="100px" alt="" id="japan"></a>
+            <a href="/list/공연" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/공연.jpg" width="100px" height="100px" alt="" id="japan"></a>
         </li>
         <li>
-            <a href="/list/분식" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/Bunsick.jpg" width="100px" height="100px" alt="" id="boon"></a>
-        </li>
-        <li>
-            <a href="/list/중식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Zazang.jpg" width="100px" height="100px" alt="" id="china"></a>
-        </li>
-        <li>
-            <a href="/list/햄버거" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Hamburger.jpg" width="100px" height="100px" alt="" id="ham"></a>
+            <a href="/list/기타" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/기타.jpg" width="100px" height="100px" alt="" id="boon"></a>
         </li>
     </ul>
     <br><br>
@@ -109,32 +103,24 @@
         $("a.hoverbtn").hover(function(){
             console.log($(this)[0].children[0].id);
             switch($(this)[0].children[0].id){
-                case "pizza": $(this)[0].children[0].src = "/images/Pizza2.jpg";
+                case "pizza": $(this)[0].children[0].src = "/images/연극.jpg";
                     break;
-                case "chicken": $(this)[0].children[0].src = "/images/Chicken2.jpg";
+                case "chicken": $(this)[0].children[0].src = "/images/뮤지컬.jpg";
                     break;
-                case "japan": $(this)[0].children[0].src = "/images/Chobab2.jpg";
+                case "japan": $(this)[0].children[0].src = "/images/공연.jpg";
                     break;
-                case "boon": $(this)[0].children[0].src = "/images/Bunsick2.jpg";
-                    break;
-                case "china": $(this)[0].children[0].src = "/images/Zazang2.jpg";
-                    break;
-                case "ham": $(this)[0].children[0].src = "/images/Hamburger2.jpg";
+                case "boon": $(this)[0].children[0].src = "/images/기타.jpg";
                     break;
             }
         }, function(){
             switch($(this)[0].children[0].id){
-                case "pizza": $(this)[0].children[0].src = "/images/공연.jpg";
+                case "pizza": $(this)[0].children[0].src = "/images/연극.jpg";
                     break;
-                case "chicken": $(this)[0].children[0].src = "/images/Chicken.jpg";
+                case "chicken": $(this)[0].children[0].src = "/images/뮤지컬.jpg";
                     break;
-                case "japan": $(this)[0].children[0].src = "/images/Chobab.jpg";
+                case "japan": $(this)[0].children[0].src = "/images/공연.jpg";
                     break;
-                case "boon": $(this)[0].children[0].src = "/images/Bunsick.jpg";
-                    break;
-                case "china": $(this)[0].children[0].src = "/images/Zazang.jpg";
-                    break;
-                case "ham": $(this)[0].children[0].src = "/images/Hamburger.jpg";
+                case "boon": $(this)[0].children[0].src = "/images/기타.jpg";
                     break;
             }
         });
