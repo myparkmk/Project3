@@ -86,16 +86,16 @@
     <!-- Centered Tabs -->
     <ul class="nav nav-tabs nav-justified">
         <li>
-            <a href="/list/피자" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/연극.jpg" width="100px" height="100px" alt="" id="pizza"></a>
+            <a href="/list/연극" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/연극.jpg" width="100px" height="100px" alt="" id="pizza"></a>
         </li>
         <li>
-            <a href="/list/치킨" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/뮤지컬.jpg" width="100px" height="100px" alt="" id="chicken"></a>
+            <a href="/list/뮤지컬" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/뮤지컬.jpg" width="100px" height="100px" alt="" id="chicken"></a>
         </li>
         <li>
-            <a href="/list/일식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/공연.jpg" width="100px" height="100px" alt="" id="japan"></a>
+            <a href="/list/공연" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/공연.jpg" width="100px" height="100px" alt="" id="japan"></a>
         </li>
         <li>
-            <a href="/list/분식" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/기타.jpg" width="100px" height="100px" alt="" id="boon"></a>
+            <a href="/list/기타" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/기타.jpg" width="100px" height="100px" alt="" id="boon"></a>
         </li>
     </ul>
     <br><br>
@@ -103,13 +103,13 @@
         $("a.hoverbtn").hover(function(){
             console.log($(this)[0].children[0].id);
             switch($(this)[0].children[0].id){
-                case "pizza": $(this)[0].children[0].src = "/images/Pizza2.jpg";
+                case "pizza": $(this)[0].children[0].src = "/images/연극.jpg";
                     break;
-                case "chicken": $(this)[0].children[0].src = "/images/Chicken2.jpg";
+                case "chicken": $(this)[0].children[0].src = "/images/뮤지컬.jpg";
                     break;
-                case "japan": $(this)[0].children[0].src = "/images/Chobab2.jpg";
+                case "japan": $(this)[0].children[0].src = "/images/공연.jpg";
                     break;
-                case "boon": $(this)[0].children[0].src = "/images/Bunsick2.jpg";
+                case "boon": $(this)[0].children[0].src = "/images/기타.jpg";
                     break;
             }
         }, function(){
