@@ -231,7 +231,13 @@
     <frame x="-6" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38844085" />
+=======
+
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38739946" />
+
+>>>>>>> 48abdb5048112f05b0c3b486fe3e7d95da2a9ae2
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -240,7 +246,13 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.14580265" />
+=======
+
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.089838" />
+
+>>>>>>> 48abdb5048112f05b0c3b486fe3e7d95da2a9ae2
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
