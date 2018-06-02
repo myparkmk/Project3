@@ -21,20 +21,20 @@
 
 <body>
 
-    <!-- Navigation -->
+<!-- Navigation -->
 
 
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/admin">Administrator</a>
-      </div>
-      <ul class="nav navbar-nav">
-          <li class="active2"><a href="/admin">회원 관리</a></li> 
-          <li class="active"><a data-toggle="pill" href="#notice" style="color:black" onclick="location.href='/admin_ceo';">업소 관리</button></a></li>
-          <li><a data-toggle="pill" href="#faq" style="color:black" onclick="location.href='/board';">공지사항</a></li>
-      </ul>
-  </div>
+            <a class="navbar-brand" href="/admin">Administrator</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active2"><a href="/admin">회원 관리</a></li>
+            <li class="active"><a data-toggle="pill" href="#notice" style="color:black"
+                                  onclick="location.href='/admin_ceo';">공연팀 관리</a></li>
+        </ul>
+    </div>
 </nav>
 <div class="container">
     <div class="tab-content">
@@ -42,108 +42,76 @@
         <div id="notice" class="tab-pane fade in active">
             <br>
             <hr>
-            <h2>업소 목록</h2>  
+            <h2>공연팀 목록</h2>
             <hr>
-            <div class="table-striped"> 
-              <table class="table table-striped" id="person_table">
-                <thead>
-                  <tr>
-                    <th>사업자번호</th>
-                    <th>상호명</th>
-                    <th>업종분류</th>
-                    <th>전화번호</th>
-                    <th>휴대폰번호</th>
-                    <th>판매자아이디</th>
-                </tr>
-            </thead>
+            <br>
+            <br>
+            <div class="table-striped">
+                <table class="table table-striped" id="person_table">
+                    <thead>
+                    <tr>
+                        <th>팀 이름</th>
+                        <th>주요 장르</th>
+                        <th>팀 소개</th>
+                        <th>이메일</th>
+                        <th>전화번호</th>
+                        <th>기타</th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-                <%
+                    <tbody>
+                    <%
+                    for(var i = 0;i < rows.length; i++)
+                    {
+                        var oneItem = rows[i];
+                    %>
+                    <tr>
+                        <td><%= oneItem.team_name %></td>
+                        <td><%= oneItem.team_genre %></td>
+                        <td><%= oneItem.team_intro %></td>
+                        <td><%= oneItem.team_mail %></td>
+                        <td><%= oneItem.team_phone %></td>
+                        <td><%= oneItem.etc %></td>
+                    </tr>
 
-                for(var i=0;i<rows.length; i++)
-                {
-                var oneItem = rows[i];
-                %> 
-                <tr>
-                    <td><%=oneItem.seller_num%></td>
-                    <td><%=oneItem.seller_num%></td>
-                    <td><%=oneItem.seller_type%></td>
-                    <td><%=oneItem.seller_tell%></td>
-                    <td><%=oneItem.seller_phone%></td>
-                    <td><%=oneItem.seller_id%></td>
-                </tr>
+                    <%
+                    }
+                    %>
 
-                <%
-            }
-            %>
+                    </tbody>
+                </table>
+                <form id="joinForm" action="/admin_ceo" method="post">
+                    <hr>
+                    <br>
+                    <td>
+                        <input type="hidden" name="tel" id="tel">
+                        <select name="person_info" id="person_info">
+                            <option value="s_num">팀 이름</option>
+                            <option value="s_name">주요 장르</option>
+                            <option value="s_type">팀 소개</option>
+                            <option value="s_tell">이메일</option>
+                            <option value="s_phone">전화번호</option>
+                            <option value="s_id">기타</option>
+                        </select>
+                        <input type="text" name="person_info2" id="person_info2" size="20" maxLength="20">
+                        <input type="submit" class="btn btn-success btn-md" id="btnsearch" name="search" value="검색">
+                    </td>
+                </form>
 
-
-        </tbody>
-    </table>    
-    <form id="joinForm" action="/admin_ceo" method="post">
-       <hr>
-       <br>
-       <td>
-        <input type="hidden" name="tel" id="tel">
-        <select name="person_info" id="person_info">
-            <option value="s_num">사업자번호</option>
-            <option value="s_name">상호명</option>
-            <option value="s_type">업종분류</option>
-            <option value="s_tell">전화번호</option> 
-            <option value="s_phone">휴대폰번호</option>
-            <option value="s_id">판매자아이디</option
-            </select>
-            <input type="text" name="person_info2" id="person_info2" size="20" maxLength="20">
-            <input type="submit"  class="btn btn-success btn-md" id="btnsearch" name="search" value="검색">
-        </td> 
-    </form>
-
-</div>
-</div>
-</div>
-
-
-
-<div id="faq" class="tab-pane fade">
-
-    <a href="/board/write">글쓰기로 이동</a>
-    <br>
-    <br>
-
-    <table border="1">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>작성자</th>
-            <th>제목</th>
-            <th>조회수</th>
-        </tr>
-    </thead>
-
-    <%
-    for(var i = 0; i <rows.length; i++)
-    {
-    var oneItem = rows[i];
-    %>
-    <tr>
-        <td><%=oneItem.idx%></td>
-        <td><%=oneItem.creator_id%></td>
-        <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.title%></a></td>
-        <td><%=oneItem.hit%></td>
-    </tr>
-    <%                    
-}
-%>
-</table>
-</div>
-
-
+            </div>
+        </div>
+    </div>
 </div>
 <hr>
 <br>
 
 <!-- Footer -->
 <footer>
+
+    <a href="/">
+        <button>LINKES 메인 페이지로</button>
+    </a>
+    <br><br>
     <div class="row">
         <div class="col-lg-12">
             <p>Software Engineering Project </p>

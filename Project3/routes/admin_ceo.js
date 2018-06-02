@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     {
       if(err) console.error("커넥션 객체 얻어오기 에러: ", err);
       console.log(req.body.class);
-        var sql = "select * from seller";
+        var sql = "select * from team";
 
    connection.query(sql, function(err, rows)
       {

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>공연팀 정보 관리</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/javascripts/jquery-1.12.3.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LINKES</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        $(function() {
+
+            $("#btnJoin").click(
+                function() {
+
+                    if ($("#team_name").val() == "") {
+                        alert("아이디를 꼭 입력하세요");
+                        $("#team_name").focus();
+                        return;
+                    }
+                    if ($("#tema_genre").val() == "") {
+                        alert("장르를 꼭 입력하세요");
+                        $("#tema_genre").focus();
+                        return;
+                    }
+                    if ($("#team_intro").val() == "") {
+                        alert("소개를 꼭 입력하세요");
+                        $("#team_intro").focus();
+                        return;
+                    }if ($("#team_phone2").val() == "") {
+                        alert("전화번호를 꼭 입력하세요");
+                        $("#team_phone2").focus();
+                        return;
+                    }if ($("#team_phone1").val() == "") {
+                        alert("전화번호를 꼭 입력하세요");
+                        $("#team_phone1").focus();
+                        return;
+                    }
+
+                    $("#joinForm").submit();
+                }
+            );
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="text-right">
+                <div class="btn-group" style="background-color:white-space">
+                    <div col-md-3>
+                        <span class="input-group-btn">
+                          <a href="/service"><button type="button" class="btn btn-default">고객센터</button></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/">
+                    <img class="img-responsive center-block" src="/images/main_logo.jpg" alt="logo">
+                </a>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Centered Tabs -->
+
+    <br><br>
+
+    <div class="container">
+        <h1 style="color: #5e9ca0;">공연팀 정보 수정</h1>
+        <br>
+        <br>
+        <br>
+        <form id="joinForm" action='/ceo_teammanage' method='post'>
+            <table class="table table-striped" width="400">
+                <tr>
+                    <th>팀 이름</th>
+                    <td>
+                        <input type="text" name="team_name" id="team_name" value="<%=row.team_name%>" required size="12" maxLength="12">
+                    </td>
+                </tr>
+                <tr>
+                    <th>주요 장르</th>
+                    <td>
+                        <input type="text" name="team_genre" id="team_genre" value="<%=row.team_genre%>" size="12" maxLength="12">
+                    </td>
+                </tr>
+                <tr>
+                    <th>팀 소개</th>
+                    <td>
+                        <input type="text" name="team_intro" id="team_intro" value="<%=row.team_intro%>" size="50" maxLength="50">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input type="mail" name="team_email" id="team_email" value="<%=row.team_mail%>" size="30" maxLength="50">
+                    </td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input type="hidden" name="tel" id="tel">
+                        <select name="tel1" id="tel1">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
+                        </select>
+
+                        <input type="text" name="team_phone1" id="team_phone1"  size="4" maxLength="4">
+                        <input type="text" name="team_phone2" id="team_phone2"  size="4" maxLength="4">
+                    </td>
+                </tr>
+                <tr>
+                    <th>기타</th>
+                    <td>
+                        <input type="text" id="etc" name="etc" size="30" maxlength="50" value="<%=row.etc%>">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            <input type="submit" class="btn btn-success" id="btnJoin" name="join" value="수정">
+
+                            <input type="reset" class="btn btn-danger" name="cancel" value="취소">
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Software Engineering Project </p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
+</body>
+
+</html>
