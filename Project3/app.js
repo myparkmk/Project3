@@ -8,6 +8,7 @@ var fs = require('fs');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
+var multer = require('multer');
 var session = require('express-session');
 
 var routes = require('./routes/index');
@@ -26,6 +27,7 @@ var ceo_review = require('./routes/ceo_review');
 var ceo_signup = require('./routes/ceo_signup');
 var ceo_service = require('./routes/ceo_service');
 var ceo_teammanage = require('./routes/ceo_teammanage');
+var ceo_showRegister = require('./routes/ceo_showRegister');
 var ceo_login = require('./routes/ceo_login');
 var admin = require('./routes/admin');
 var admin_ceo = require('./routes/admin_ceo');
@@ -70,7 +72,7 @@ app.use('/service_board',service_board);
 app.use('/admin', admin);
 app.use('/admin_ceo', admin_ceo);
 app.use('/ceo_teammanage', ceo_teammanage);
-
+app.use('/ceo_showRegister', ceo_showRegister);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
