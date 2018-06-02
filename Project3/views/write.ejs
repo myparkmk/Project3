@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LINKES Administrator </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin">Administrator</a>
+      </div>
+      <ul class="nav navbar-nav">
+          <li class="active2"><a href="/admin">회원 관리</a></li> 
+          <li class="active2"><a data-toggle="pill" href="#notice" style="color:black" onclick="location.href='/admin_ceo';">업소 관리</button></a></li>
+          <li class="activeㅋ"><a data-toggle="pill" href="#faq" style="color:black" onclick="location.href='/board';">공지사항</a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+    <h1>공지사항 작성</h1>
+
+
+<form action="/board/write" method="post" onsubmit="return onWriteSubmit()">
+     <table class="table table-striped">
+        <tr>
+          <th>작성자</th>
+          <td><input type="text" name="creator_id" size="60"  id = "creator_id" required/></td>
+        </tr>
+        <tr>
+          <th>제목</th>
+          <td><input type="text" name="title" size="60"  id = "title" required/></td>
+        </tr>
+        <tr>
+          <th>내용</th>
+          <td><textarea name="content" id="content" cols = "65" rows ="10"  required></textarea></td>
+        </tr>
+        <tr>
+          <th>패스워드</th>
+          <td><input type="password" name="passwd" id = "passwd" required/></td>
+        </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">글쓰기</button>
+        </td>
+    </tr>
+      </table>
+</form>
+
+
+<script>
+    function onWriteSubmit()
+    {
+        if( $("#creator_id").val().trim() == "")
+        {
+            var message = "아이디를 입력해 주세요";
+            $("#creator_id").var("");
+            $("#creator_id").focus("");
+            alert(message);
+            return false;
+        }
+
+        if( $("title").val().trim() == "")
+        {
+            var message = "제목을 입력해 주세요";
+            $("#title").var("");
+            $("#title").focus("");
+            alert(message);
+            return false;
+        }
+
+        if( $("content").val().trim() == "")
+        {
+            var message = "본문 내용을 입력해 주세요";
+            $("#content").var("");
+            $("#content").focus("");
+            alert(message);
+            return false;
+        }
+
+        if( $("passwd").val().trim() == "")
+        {
+            var message = "패스워드를 입력해 주세요";
+            $("#passwd").var("");
+            $("#passwd").focus("");
+            alert(message);
+            return false;
+        }           
+</script>
+
+</body>
+</html>

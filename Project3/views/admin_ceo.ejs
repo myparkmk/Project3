@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LINKES Administrator </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin">Administrator</a>
+      </div>
+      <ul class="nav navbar-nav">
+          <li class="active2"><a href="/admin">회원 관리</a></li> 
+          <li class="active"><a data-toggle="pill" href="#notice" style="color:black" onclick="location.href='/admin_ceo';">업소 관리</button></a></li>
+          <li><a data-toggle="pill" href="#faq" style="color:black" onclick="location.href='/board';">공지사항</a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+    <div class="tab-content">
+
+        <div id="notice" class="tab-pane fade in active">
+            <br>
+            <hr>
+            <h2>업소 목록</h2>  
+            <hr>
+            <div class="table-striped"> 
+              <table class="table table-striped" id="person_table">
+                <thead>
+                  <tr>
+                    <th>사업자번호</th>
+                    <th>상호명</th>
+                    <th>업종분류</th>
+                    <th>전화번호</th>
+                    <th>휴대폰번호</th>
+                    <th>판매자아이디</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <%
+
+                for(var i=0;i<rows.length; i++)
+                {
+                var oneItem = rows[i];
+                %> 
+                <tr>
+                    <td><%=oneItem.seller_num%></td>
+                    <td><%=oneItem.seller_num%></td>
+                    <td><%=oneItem.seller_type%></td>
+                    <td><%=oneItem.seller_tell%></td>
+                    <td><%=oneItem.seller_phone%></td>
+                    <td><%=oneItem.seller_id%></td>
+                </tr>
+
+                <%
+            }
+            %>
+
+
+        </tbody>
+    </table>    
+    <form id="joinForm" action="/admin_ceo" method="post">
+       <hr>
+       <br>
+       <td>
+        <input type="hidden" name="tel" id="tel">
+        <select name="person_info" id="person_info">
+            <option value="s_num">사업자번호</option>
+            <option value="s_name">상호명</option>
+            <option value="s_type">업종분류</option>
+            <option value="s_tell">전화번호</option> 
+            <option value="s_phone">휴대폰번호</option>
+            <option value="s_id">판매자아이디</option
+            </select>
+            <input type="text" name="person_info2" id="person_info2" size="20" maxLength="20">
+            <input type="submit"  class="btn btn-success btn-md" id="btnsearch" name="search" value="검색">
+        </td> 
+    </form>
+
+</div>
+</div>
+</div>
+
+
+
+<div id="faq" class="tab-pane fade">
+
+    <a href="/board/write">글쓰기로 이동</a>
+    <br>
+    <br>
+
+    <table border="1">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>작성자</th>
+            <th>제목</th>
+            <th>조회수</th>
+        </tr>
+    </thead>
+
+    <%
+    for(var i = 0; i <rows.length; i++)
+    {
+    var oneItem = rows[i];
+    %>
+    <tr>
+        <td><%=oneItem.idx%></td>
+        <td><%=oneItem.creator_id%></td>
+        <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.title%></a></td>
+        <td><%=oneItem.hit%></td>
+    </tr>
+    <%                    
+}
+%>
+</table>
+</div>
+
+
+</div>
+<hr>
+<br>
+
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Software Engineering Project </p>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</footer>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/bootstrap-3.3.6-dist/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
