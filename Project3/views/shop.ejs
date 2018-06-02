@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LINKES</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <script>
+        var cart_menu = new Array();
+        var index = new Array();
+        var count;
+
+        function menufunc() {
+            document.getElementById("menu").focus();
+        }
+
+        function reviewfunc() {
+            document.getElementById("review").focus();
+        }
+
+        function change_quantity(num) {
+            document.getElementById("quant["+num+"]").value = document.getElementById("quantity["+num+"]").value;
+            document.getElementById("quantity["+num+"]").value = document.getElementById("quant["+num+"]").value;
+            change_price(num);
+            //x.value = x.value;
+        }
+
+        function change_price(num){
+            var x = document.getElementById("ori_price["+num+"]").value;
+            document.getElementById("price["+num+"]").value = document.getElementById("quant["+num+"]").value * x;
+            document.getElementById("view["+num+"]").innerHTML=document.getElementById("price["+num+"]").value;
+
+            totalmoney();
+        }
+
+        function totalmoney(){
+            var total = 0;
+
+            for(p=0;p<index.length;p++)
+            {
+              total = total + Number(document.getElementById("price["+index[p]+"]").value);//Number(document.getElementById("quant["+index[i]+"]").value) * Number(document.getElementById("ori_price["+index[i]+"]").value);
+            }
+
+            document.getElementById("money").innerHTML = "<hr>주문합계금액<br>" + total;
+        }
+
+        function removecart(num){
+            var list = document.getElementById("menu-quantity-price");
+            var child1 = document.getElementById("divs1["+num+"]");
+            var child2 = document.getElementById("divs2["+num+"]");
+
+            child1.parentNode.removeChild(child1);
+            child2.parentNode.removeChild(child2);
+
+            var d = index.indexOf(num);
+            index.splice(d, 1);
+
+            document.getElementById("numofmenu").value = Number(document.getElementById("numofmenu").value)-1;
+            if(!list.hasChildNodes())
+            {
+              document.getElementById("money").innerHTML = "메뉴를 선택해주세요";
+              document.getElementById("ord").innerHTML="";
+              count=0;
+            }
+            else {
+              totalmoney();
+            }
+
+        }
+        function cartfunc(id, m_p, m_n, m_c) {
+            if(id=="")
+            {
+              alert("로그인을 해주세요");
+            }
+            else {
+              var price = 0;
+              //alert(index.length);
+              var menu = "";
+              if(count!=1)
+              {
+                count=1;
+                document.getElementById("ord").innerHTML="<button class='btn btn-success btn-lg btn-block' type='submit'>주문하기</button>"
+                index.push(0);
+              }
+              else {
+                var t = index[index.length-1] + 1;
+                index.push(t);
+              }
+
+              document.getElementById("numofmenu").value=Number(document.getElementById("numofmenu").value)+1;
+
+
+              document.getElementById("menu-quantity-price").innerHTML+= "<div id='divs1["+index[index.length-1]+"]' class='col-sm-6 text-left'><input type='hidden' value='" +m_n+ "' id='menu["+index[index.length-1]+"]' name='menu[]'/><p id='text["+index[index.length-1]+"]' style='text-left'>"+ m_n +"</p></div>";
+              document.getElementById("menu-quantity-price").innerHTML+= "<div id='divs2["+index[index.length-1]+"]' class='col-sm-6 text-right'>"+
+              "<input type='text' id='quantity["+index[index.length-1]+"]' style='width:50px' onkeyup='change_quantity("+index[index.length-1]+")' value='1'/>"+
+              "<input type='hidden' id='quant["+index[index.length-1]+"]' name='quant[]' value='1'/>"+
+              "<input type='hidden' id='code["+index[index.length-1]+"]' name='code[]' value='"+m_c+"'/>"+
+              "<img src='/images/delete_icon.JPG' style='cursor:pointer' onclick='removecart("+index[index.length-1]+")'/><br>"+
+              "<input type='hidden' id='ori_price["+index[index.length-1]+"]' value='"+m_p+"'/>"+
+              "<input type='hidden' id='price["+index[index.length-1]+"]' value='" + m_p + "'/>"+
+              "<strong id='view["+index[index.length-1]+"]'>" + m_p + "</strong><hr></div>";
+
+              totalmoney();
+            }
+            //document.getElementById("menu-quantity-price").innerHTML+="";
+/*
+            document.getElementById("menu-quantity-price").innerHTML+="<input type='text' id='quantity["+cart_menu.length+"]' style='width:50px' onkeyup='change_quantity("+cart_menu.length+")' value='1'/>"
+
+            document.getElementById("menu-quantity-price").innerHTML+="<input type='hidden' id='quant["+cart_menu.length+"]' name='quant[]' value='1'/>"
+            document.getElementById("menu-quantity-price").innerHTML+="<img src='/images/delete_icon.JPG' style='cursor:pointer' onclick='removecart("+cart_menu.length+")'/><br>"
+
+            document.getElementById("menu-quantity-price").innerHTML+="<input type='hidden' id='ori_price["+cart_menu.length+"]' value='"+m_p+"'/>"
+            document.getElementById("menu-quantity-price").innerHTML+="<input type='hidden' id='price["+cart_menu.length+"]' value='" + m_p + "'/>"
+            document.getElementById("menu-quantity-price").innerHTML+="<strong id='view["+cart_menu.length+"]'>" + m_p + "</strong></div><hr>"
+*/
+        }
+    </script>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <div class="text-right">
+              <%
+              if(session.user==undefined)
+              {
+              %>
+                <div class="btn-group" style="background-color:white-space">
+                    <div col-md-3>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" onclick="location.href='/login';">로그인</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/signup';">회원가입</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/service';">고객센터</button>
+                        </span>
+                    </div>
+                </div>
+                <%
+                }
+                else{
+                %>
+                <div class="btn-group" style="background-color:white-space">
+                    <div col-md-3>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" onclick="location.href='/mypage/order_list';">마이페이지</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/login/logout';">로그아웃</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/service';">고객센터</button>
+                        </span>
+                    </div>
+                </div>
+
+                <%
+                }
+                %>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/">
+                    <img class="img-responsive center-block" src="/images/main_logo.jpg" alt="logo">
+                </a>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <!-- Text박스로 업소명 입력 및 위치 입력 코드 추가해야됨 -->
+        <div class="input-group srch">
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="동명을 입력해주세요">
+            <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
+            </span>
+
+            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="업소명을 검색해주세요">
+            <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
+            </span>
+        </div>
+    </div>
+    <br>
+    <br>
+    <ul class="nav nav-tabs nav-justified">
+        <li>
+            <a href="/list/피자" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/Pizza.jpg" width="100px" height="100px" alt="" id="pizza"></a>
+        </li>
+        <li>
+            <a href="/list/치킨" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chicken.jpg" width="100px" height="100px" alt="" id="chicken"></a>
+        </li>
+        <li>
+            <a href="/list/일식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chobab.jpg" width="100px" height="100px" alt="" id="japan"></a>
+        </li>
+        <li>
+            <a href="/list/분식" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/Bunsick.jpg" width="100px" height="100px" alt="" id="boon"></a>
+        </li>
+        <li>
+            <a href="/list/중식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Zazang.jpg" width="100px" height="100px" alt="" id="china"></a>
+        </li>
+        <li>
+            <a href="/list/햄버거" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Hamburger.jpg" width="100px" height="100px" alt="" id="ham"></a>
+        </li>
+    </ul>
+    <br><br>
+    <script>
+        $("a.hoverbtn").hover(function(){
+            console.log($(this)[0].children[0].id);
+            switch($(this)[0].children[0].id){
+                case "pizza": $(this)[0].children[0].src = "/images/Pizza2.jpg";
+                    break;
+                case "chicken": $(this)[0].children[0].src = "/images/Chicken2.jpg";
+                    break;
+                case "japan": $(this)[0].children[0].src = "/images/Chobab2.jpg";
+                    break;
+                case "boon": $(this)[0].children[0].src = "/images/Bunsick2.jpg";
+                    break;
+                case "china": $(this)[0].children[0].src = "/images/Zazang2.jpg";
+                    break;
+                case "ham": $(this)[0].children[0].src = "/images/Hamburger2.jpg";
+                    break;
+            }
+        }, function(){
+            switch($(this)[0].children[0].id){
+                case "pizza": $(this)[0].children[0].src = "/images/공연.jpg";
+                    break;
+                case "chicken": $(this)[0].children[0].src = "/images/Chicken.jpg";
+                    break;
+                case "japan": $(this)[0].children[0].src = "/images/Chobab.jpg";
+                    break;
+                case "boon": $(this)[0].children[0].src = "/images/Bunsick.jpg";
+                    break;
+                case "china": $(this)[0].children[0].src = "/images/Zazang.jpg";
+                    break;
+                case "ham": $(this)[0].children[0].src = "/images/Hamburger.jpg";
+                    break;
+            }
+        });
+    </script>
+
+    <div class="navbar navbar-inverse navbar-static-top">
+
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" style="font-family:Malgun Gothic">
+                    <%
+                  var title=rows2[0];
+                  %>
+                        <%=title.seller_name%>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-width">
+
+        <div class="content row">
+            <div class="page col-md-9" id="scode_content">
+
+                <div class="question-filter">
+                    <ul class="nav nav-tabs nav-justified">
+
+                        <li class="active" style="padding:0;">
+                            <a style="cursor:pointer;" id="menu" href="#" onclick="menufunc()">메뉴<span class="caret-order"></span></a>
+                        </li>
+                        <li class="" style="padding:0;">
+                            <a style="cursor:pointer;" onclick="reviewfunc()">리뷰</a>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <br>
+
+                <div class="panel-group" id="accordion">
+                  <%
+                  var menuty = new Array();
+                  for(var i=0; i<rows.length;i++)
+                  {
+                    var oneItem = rows[i];
+                    if(menuty.indexOf(rows[i].menu_type)<0)
+                      menuty.push(rows[i].menu_type);
+                  }
+                  %>
+
+                  <%
+                  for(var i=0;i<menuty.length;i++)
+                  {
+                  %>
+                            <div class="panel panel-default">
+                                <div class="panel-heading collapsed">
+                                    <a class="accordion-toggle" href="#<%=menuty[i]%>" data-toggle="collapse">
+                                        <h3 class="panel-title" style="color:black"><%=menuty[i]%></h3>
+                                    </a>
+                                </div>
+                                <div id="<%=menuty[i]%>" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row rec">
+                                            <%
+                                  for(var j=0; j<rows.length;j++)
+                                  {
+                                    var oneItem = rows[j];
+                                    if(oneItem.menu_type==menuty[i]){
+                                  %>
+                                                <div class="col-xs-6 col-sm-4 col-md4 col-lg-4">
+                                                    <div class="thumbnail">
+                                                        <img alt="<%=oneItem.menu_name%>" src="/images/메뉴사진/<%=oneItem.seller_name%>/<%=oneItem.menu_img%>">
+                                                        <div class="caption">
+                                                            <div class="small">
+                                                                <span class="text-left"><%=oneItem.menu_name%></span>
+                                                                <br>
+                                                                <strong class="text-left"><%=oneItem.menu_price%></strong>
+                                                            </div>
+                                                            <div class="small">
+                                                                <img src="/images/cart.JPG" style="cursor:pointer" onclick="cartfunc('<%=session.user%>','<%=oneItem.menu_price%>','<%=oneItem.menu_name%>','<%=oneItem.menu_code%>')"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%
+                                    }
+                                  }
+                                  %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                  }
+                  %>
+                </div>
+
+                <div class="question-filter">
+                    <ul class="nav nav-tabs nav-justified">
+
+                        <li class="active" style="padding:0;">
+                            <a style="cursor:pointer;" href="#" onclick="menufunc()">메뉴<span class="caret-order"></span></a>
+                        </li>
+                        <li class="" style="padding:0;">
+                            <a style="cursor:pointer;" id="review" href="#" onclick="reviewfunc()">리뷰</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="page col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><strong>업소 상세정보</strong></div>
+                    <div class="panel-body">
+                        <strong>운영시간</strong>
+                        <br>낮 09:00 ~ 밤 21:00
+                        <br>
+                        <strong>전화번호</strong>
+                        <br><%=title.seller_phone%><br>
+                        <strong>업소소개</strong>
+                        <br>
+                        <%=title.seller_comment%>
+                        <br>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                  <form id="menu_order" action="/order/<%=title.seller_name%>" method="get">
+                    <input type="hidden" id="numofmenu" name="numofmenu" value="0"/>
+                    <div class="panel-heading"><strong>장바구니</strong></div>
+
+                    <div class="panel-body">
+                      <div id="menu-quantity-price" class="row"></div>
+
+                      <p id="money" name="money" style="text-center">메뉴를 선택해주세요</p>
+
+                    </div>
+                    <div id="ord"></div>
+                    </form>
+                </div>
+            </div>
+          </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Software Engineering Project </p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/bootstrap-3.3.6-dist/js/jquery.js "></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bootstrap-3.3.6-dist/js/bootstrap.min.js "></script>
+</body>
+
+</html>
