@@ -32,6 +32,9 @@ var ceo_login = require('./routes/ceo_login');
 var admin = require('./routes/admin');
 var admin_ceo = require('./routes/admin_ceo');
 var service_board = require('./routes/service_board');
+
+var detail = require('./routes/detail');
+
 var app = express();
 
 // view engine setup
@@ -73,6 +76,9 @@ app.use('/admin', admin);
 app.use('/admin_ceo', admin_ceo);
 app.use('/ceo_teammanage', ceo_teammanage);
 app.use('/ceo_showRegister', ceo_showRegister);
+
+app.use('/detail', detail);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
