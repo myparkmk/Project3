@@ -135,15 +135,15 @@
       %>
                 <div class="col-xs-4">
                     <div class="thumbnail">
-                        <a href="/shop/<%=oneItem.seller_name%>">
-                        <img src="/images/업소 대표사진/<%=oneItem.seller_type%>/<%=oneItem.seller_img%>" alt="업소대표사진">
+                        <a href="/shop/<%=oneItem.show_name%>">
+                        <img src="<%=oneItem.show_img%>" alt="공연대표사진" width="300" height="400">
                         </a>
                         <div class="caption">
-                            <h4><%=oneItem.seller_name%></h4>
+                            <h4><%=oneItem.show_name%></h4>
                             <p>
-                                <%=oneItem.seller_tell%>
+                                장소 : <%=oneItem.show_place%>
                             </p>
-                            <p><a href="/shop/<%=oneItem.seller_name%>" class="btn btn-info" role="button">구매하기</a></p>
+                            <p><a href="/shop/<%=oneItem.show_name%>" class="btn btn-info" role="button">예매하기</a></p>
                         </div>
                     </div>
                 </div>

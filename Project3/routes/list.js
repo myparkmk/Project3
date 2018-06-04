@@ -16,7 +16,7 @@ router.get('/:name', function(req, res, next){
   console.log("name : " + name);
   pool.getConnection(function (err, connection){
 
-    var sqlForSelectList = "select seller_type, seller_name, seller_tell, seller_img from seller where seller_type=?";
+    var sqlForSelectList = "select team_id,show_name ,show_member, show_place, show_genre,show_start,show_end,show_intro,show_cost,etc,show_img  from seller where show_genre=?";
     connection.query(sqlForSelectList,[name], function (err, rows){
       if(err) console.error("err : "+err);
       console.log("rows : " + JSON.stringify(rows));
