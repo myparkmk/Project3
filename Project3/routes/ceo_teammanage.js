@@ -7,7 +7,7 @@ var pool = mysql.createPool({
     host : 'localhost',
     user : 'root',
     database : 'test',
-    password : 'seki'
+    password : 'dbsrn828'
 });
 var express = require('express');
 var router = express.Router();
