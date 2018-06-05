@@ -7,7 +7,7 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database : 'test',
-    password : ''
+    password : 'dbsrn828'
 });
 
     var show_name;
