@@ -83,92 +83,14 @@
             </div>
         </div>
 
-        <!-- Text박스로 업소명 입력 및 위치 입력 코드 추가해야됨 -->
-        <div class="input-group srch">
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="동명을 입력해주세요">
-            <span class="input-group-btn">
-    <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
-    </span>
-
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="업소명을 검색해주세요">
-            <span class="input-group-btn">
-    <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
-    </span>
-        </div>
 
 
         <br>
         <br>
         <!-- Centered Tabs -->
 
-        <ul class="nav nav-tabs nav-justified">
-            <li>
-                <a href="/list/피자" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/Pizza.jpg" width="100px" height="100px" alt="" id="pizza"></a>
-            </li>
-            <li>
-                <a href="/list/치킨" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chicken.jpg" width="100px" height="100px" alt="" id="chicken"></a>
-            </li>
-            <li>
-                <a href="/list/일식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Chobab.jpg" width="100px" height="100px" alt="" id="japan"></a>
-            </li>
-            <li>
-                <a href="/list/분식" class="btn btn-secondary hoverbtn"> <img class="img-circle img-responsive img-center" src="/images/Bunsick.jpg" width="100px" height="100px" alt="" id="boon"></a>
-            </li>
-            <li>
-                <a href="/list/중식" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Zazang.jpg" width="100px" height="100px" alt="" id="china"></a>
-            </li>
-            <li>
-                <a href="/list/햄버거" class="btn btn-secondary hoverbtn"><img class="img-circle img-responsive img-center" src="/images/Hamburger.jpg" width="100px" height="100px" alt="" id="ham"></a>
-            </li>
-        </ul>
         <br>
         <br>
-        <script>
-            $("a.hoverbtn").hover(function() {
-                console.log($(this)[0].children[0].id);
-                switch ($(this)[0].children[0].id) {
-                    case "pizza":
-                        $(this)[0].children[0].src = "/images/Pizza2.jpg";
-                        break;
-                    case "chicken":
-                        $(this)[0].children[0].src = "/images/Chicken2.jpg";
-                        break;
-                    case "japan":
-                        $(this)[0].children[0].src = "/images/Chobab2.jpg";
-                        break;
-                    case "boon":
-                        $(this)[0].children[0].src = "/images/Bunsick2.jpg";
-                        break;
-                    case "china":
-                        $(this)[0].children[0].src = "/images/Zazang2.jpg";
-                        break;
-                    case "ham":
-                        $(this)[0].children[0].src = "/images/Hamburger2.jpg";
-                        break;
-                }
-            }, function() {
-                switch ($(this)[0].children[0].id) {
-                    case "pizza":
-                        $(this)[0].children[0].src = "/images/연극.jpg";
-                        break;
-                    case "chicken":
-                        $(this)[0].children[0].src = "/images/Chicken.jpg";
-                        break;
-                    case "japan":
-                        $(this)[0].children[0].src = "/images/Chobab.jpg";
-                        break;
-                    case "boon":
-                        $(this)[0].children[0].src = "/images/Bunsick.jpg";
-                        break;
-                    case "china":
-                        $(this)[0].children[0].src = "/images/Zazang.jpg";
-                        break;
-                    case "ham":
-                        $(this)[0].children[0].src = "/images/Hamburger.jpg";
-                        break;
-                }
-            });
-        </script>
 
         <div class="container">
             <h2>마이페이지</h2>
@@ -177,20 +99,13 @@
             <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a href="/mypage/order_list" style="color:black">주문내역</a></li>
                 <li><a href="/mypage/myinfo" style="color:black">내 정보</a></li>
-                <li><a href="/mypage/point" style="color:black">포인트</a></li>
-                <li><a href="/mypage/myreview" style="color:black">리뷰 관리</a></li>
             </ul>
             <br>
 
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>주문일자</th>
-                        <th>주문번호</th>
-                        <th>주문금액</th>
-                        <th>할인금액</th>
-                        <th>최종금액</th>
-                        <th>매장이름</th>
+                        <th>예약정보</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -202,26 +117,7 @@
               %>
                         <tr>
                             <td>
-                                <%=item.order_year%>.
-                                    <%=item.order_month%>.
-                                        <%=item.order_day%>
-                            </td>
-                            <td>
-                                <a href="/mypage/order_list/info/<%=item.order_num%>">
-                                    <%=item.order_num%>
-                                </a>
-                            </td>
-                            <td>
-                                <%=item.order_sum%>
-                            </td>
-                            <td>
-                                <%=item.discount%>
-                            </td>
-                            <td>
-                                <%=item.final_sum%>
-                            </td>
-                            <td>
-                                <%=item.seller_name%>
+                                <%=item.show_name%>
                             </td>
                         </tr>
                         <%
