@@ -158,7 +158,7 @@ router.post('/', function(req, res, next){
 
 router.get('/aft_order/:num', function(req, res, next){
   var num = req.params.num;
-  
+
   res.render('aft_order',{order_num:num,session:req.session});
 });
 
