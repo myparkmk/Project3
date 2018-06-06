@@ -24,9 +24,9 @@
         $(function() {
             $("#btnJoin").click(
                 function() {
-                    if ($("#id").val() == "") {
+                    if ($("#user_id").val() == "") {
                         alert("아이디를 꼭 입력하세요");
-                        $("#id").focus();
+                        $("#user_id").focus();
                         return;
                     }
 
@@ -60,6 +60,11 @@
                     if ($("#address").val() == "") {
                         alert("주소를 꼭 입력해 주세요");
                         $("#address").focus();
+                        return;
+                    }
+                    if ($("#name").val() == "") {
+                        alert("생일을 꼭 입력하세요");
+                        $("#birth").focus();
                         return;
                     }
 
