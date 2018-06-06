@@ -67,6 +67,8 @@ router.post('/:name', function(req, res, next){
 
         datas=[show_name,show_code,user_id,user_name,user_tel,user_mail,user_code];
 
+        var select1 =
+
         connection.query(sqlForInsertReserve, datas, function(err, rows){
             if(err) console.error("err : " + err);
             console.log("rows: " + JSON.stringify(rows));
@@ -80,3 +82,42 @@ router.post('/:name', function(req, res, next){
     });
 });
 module.exports = router;
+
+router.post('list', function(req, res)
+{
+    var name = req.params.name;
+
+    var select1 = req.body.select1;
+    var select2 = req.body.select2;
+
+    console.log(select1);
+    console.log(select2);
+
+    pool.getConnection(function(err, connection)
+    {
+        if(err) console.error("커넥션 객체 얻어오기 에러: ", err);
+
+        if(select1 == "name"){
+            select2 = "%" + select2 + "%"
+            var sql = "select * from seller where show_name LIKE ?";
+            console.log(select2);
+        }
+        else if(select1 == "place"){
+            select2 = "%" + select2 + "%"
+            var sql = "select * from seller where show_place LIKE ?";
+        }
+        else
+            console.error("해당하는 공연이 존재하지 않습니다.");
+
+        connection.query(sql, select2, function(err, rows)
+        {
+            if(err) console.log('	err', err);
+            console.log('rows:', rows);
+
+            res.render('list', {rows: rows, session:req.session});
+
+            connection.release();
+
+        });
+    });
+});
