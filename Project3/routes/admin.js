@@ -7,7 +7,7 @@ var pool = mysql.createPool({
     host : 'localhost',
     user : 'root',
     database : 'test',
-    password : 'qktmxj011'
+    password : 'dbsrn828'
 });
 
 router.get('/', function(req, res, next) {
@@ -56,7 +56,7 @@ router.post('/', function(req, res)
        else if(person_info == "nick"){
         var sql = "select * from user where user_nick=?";
       }
-            else
+        else
         console.error("해당하는 판매자가 존재하지 않습니다.");
       connection.query(sql, person_info2, function(err, rows)
       {
