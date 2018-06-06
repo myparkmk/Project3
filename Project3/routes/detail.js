@@ -67,8 +67,6 @@ router.post('/:name', function(req, res, next){
 
         datas=[show_name,show_code,user_id,user_name,user_tel,user_mail,user_code];
 
-        var select1 =
-
         connection.query(sqlForInsertReserve, datas, function(err, rows){
             if(err) console.error("err : " + err);
             console.log("rows: " + JSON.stringify(rows));
