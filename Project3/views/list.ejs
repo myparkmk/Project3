@@ -69,17 +69,17 @@
             </div>
         </div>
 
-        <div class="input-group srch">
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연 장소를 입력해주세요 (읍/면/동/리)">
-            <span class="input-group-btn">
-              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
-            </span>
-
-            <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연팀 이름을 입력해주세요">
-            <span class="input-group-btn">
-              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
-            </span>
-        </div>
+        <form id="Form" method="post">
+            <td>
+                <input type="hidden" name="tel" id="tel">
+                <select name="select1" id="select">
+                    <option value="name">공연이름</option>
+                    <option value="place">장소</option>
+                </select>
+                <input type="text" name="select2" id="person_info2" size="20" maxLength="20">
+                <input type="submit"  class="btn btn-success btn-md" id="btnsearch" name="search" value="검색">
+            </td>
+        </form>
     </div>
     <br>
     <br>
