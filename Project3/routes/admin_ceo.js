@@ -15,12 +15,12 @@ router.get('/', function(req, res, next) {
     {
       if(err) console.error("커넥션 객체 얻어오기 에러: ", err);
       console.log(req.body.class);
-        var sql = "select * from seller";
+        var sql = "select * from team";
 
    connection.query(sql, function(err, rows)
       {
         if(err) console.err(' err', err);
-        
+
         res.render('admin_ceo',{title:"",rows:rows});
         connection.release();
       });
@@ -60,11 +60,11 @@ router.post('/', function(req, res)
       {
         if(err) console.err(' err', err);
         console.log('rows:', rows);
-      
+
        res.render('admin_ceo',{title:"hi",rows:rows});
 
         connection.release();
-     
+
     });
   });
 });

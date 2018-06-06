@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LINKES 사장님 사이트</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+
+        .carousel-inner img {
+            width: 100%; /* Set width to 100% */
+            margin: auto;
+            min-height: 200px;
+        }
+
+        /* Hide the carousel text when the screen is less than 600 pixels wide */
+        @media (max-width: 600px) {
+            .carousel-caption {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+
+    <a href="/ceo"><img class="img-responsive center-block" src="/images/ceo/ceo_main.jpg" alt="logo"></a>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/ceo_sales">내 공연팀 관리</a></li>
+                    <li><a href='/ceo_service'>서비스 소개</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href='/ceo_signup'><span class="glyphicon glyphicon-log-in"></span>공연팀 등록</a></li>
+                    <li><a href='/login'><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="/images/CEO/CEO_main1.jpg" alt="Image">
+            <div class="carousel-caption">
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="/images/CEO/CEO_main2.jpg" alt="Image">
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="container">
+    <h1 style="color: #5e9ca0;">공연 등록</h1>
+    <br>
+    <br>
+    <br>
+    <form id="joinForm" action='/ceo_showRegister' method='post'  enctype = "multipart/form-data">
+        <table class="table table-striped" width="400">
+            <input type="hidden" name="team_id"/>
+            <tr>
+                <th>공연 이름</th>
+                <td>
+                    <input type="text" name="show_name" id="show_name" required size="12" maxLength="12">
+                </td>
+            </tr>
+
+            <tr>
+                <th>공연 출연진</th>
+                <td>
+                    <input type="text" name="show_member" id="show_member" size="50" maxLength="50">
+                </td>
+            </tr>
+
+            <th>공연 장소</th>
+            <td>
+                <input type="text" name="show_place" id="show_place" size="50" maxLength="30">
+            </td>
+
+            <tr>
+                <th>공연 장르</th>
+                <td><select name="show_genre" id="show_genre">
+                        <option value ="연극">연극</option>
+                        <option value ="뮤지컬">뮤지컬</option>
+                        <option value ="공연">공연</option>
+                        <option value ="기타">기타</option>
+                    </select></td>
+            </tr>
+
+            <tr>
+                <th>공연 기간</th>
+                <td>
+                    <input type="text" name="show_start" id="show_start" size="15" maxLength="15">
+                    <input type="text" name="show_end" id="show_end" size="15" maxLength="15">
+                </td>
+            </tr>
+
+            <tr>
+                <th>공연 소개</th>
+                <td>
+                    <textarea name="show_intro" id="show_intro" cols="40" rows="10" required></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th>티켓 가격</th>
+                <td>
+                    <input type="text" name="show_cost" id="show_cost" size="50" maxLength="30">
+                </td>
+            </tr>
+
+            <tr>
+                <th>기타</th>
+                <td>
+                    <textarea name="etc" id="etc" cols="30" rows="3" required></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>이미지</td>
+                <td>
+                    <input type="file" name="image" id="image" accept="image/*" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <center>
+                        <input type="submit" class="btn btn-success" id="btnJoin" name="join" value="공연 등록">
+                        <input type="reset" class="btn btn-danger" name="cancel" value="취소">
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Software Engineering Project </p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </footer>
+</div>
+</body>
+
+</html>

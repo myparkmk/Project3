@@ -17,7 +17,7 @@ router.get('/order_list', function(req, res, next){
   var quantity = new Array();
 
   pool.getConnection(function (err, connection){
-    var sql = "select * from ord where user_id=?";
+    var sql = "select * from reserve where user_id=?";
     connection.query(sql,[user],function(err,rows){
       if(err) console.error("err : "+err);
 
@@ -118,16 +118,6 @@ router.post('/myinfo', function(req,res,next){
         connection.release();
       });
     });
-});
-
-router.get('/point', function(req, res, next){
-
-  res.render('point', {session:req.session});
-});
-
-router.get('/myreview', function(req, res, next){
-
-  res.render('myreview', {session:req.session});
 });
 
 

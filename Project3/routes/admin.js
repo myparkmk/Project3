@@ -20,12 +20,12 @@ router.get('/', function(req, res, next) {
    connection.query(sql, function(err, rows)
       {
         if(err) console.err(' err', err);
-        
+
         res.render('admin',{title:"",rows:rows});
         connection.release();
       });
    });
-  
+
 });
 
 router.post('/', function(req, res)
@@ -62,20 +62,20 @@ router.post('/', function(req, res)
       {
         if(err) console.err('	err', err);
         console.log('rows:', rows);
-  	  
+
   	   res.render('admin',{title:"hi",rows:rows});
 
   	  //row = mytable.insertRow(mytable.rows.length);
   	  //cell1 = row.insertCell(0);
   	  //cell2 = row.insertCell(1);
     	  //cell1.innerHTML = '항목';
-    	  //cell2.innerHTML = '<input type="text" name="strs[]"/>';    
+    	  //cell2.innerHTML = '<input type="text" name="strs[]"/>';
 
        // console.log(rows.cnt);
-        
+
 
         connection.release();
-     
+
     });
   });
 });

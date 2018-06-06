@@ -7,58 +7,46 @@ var fs = require('fs');
 
 var mysql = require('mysql');
 var pool = mysql.createPool({
-    connectionLimit : 5,
-    host : 'localhost',
-    user : 'root',
-    database : 'test',
-    password : 'qktmxj011'
+    connectionLimit: 5,
+    host: 'localhost',
+    user: 'root',
+    database: 'test',
+    password: 'qktmxj011'
 });
 
-router.get('/', function(req, res, next){
-  res.render('ceo_signup');
+router.get('/', function (req, res, next) {
+    res.render('ceo_signup');
 });
 
-router.post('/', multipartMiddleware, function(req, res, next){
+router.post('/', function (req, res, next) {
+    var team_id = req.session.user;
+    var team_name = req.body.team_name;
+    var team_pass = req.body.team_pass;
+    var team_genre = req.body.team_genre;
+    var team_intro = req.body.team_intro;
+    var team_mail = req.body.team_mail;
+    var team_phone0 = req.body.team_phone0;
+    var team_phone1 = req.body.team_phone1;
+    var team_phone2 = req.body.team_phone2;
+    var team_phone = team_phone0 + team_phone1 + team_phone2;
+    var etc = req.body.etc;
 
-  var SELLER_ID = req.body.SELLER_ID;
-  var SELLER_PASSWD = req.body.SELLER_PASSWD;
-  var SELLER_TYPE = req.body.SELLER_TYPE;
-  var SELLER_NAME = req.body.SELLER_NAME;
-  var tel1 = req.body.tel1;
-  var tel2 = req.body.tel2;
-  var tel3 = req.body.tel3;
-  var SELLER_TELL = tel1+tel2+tel3;
-  var phone1 = req.body.seller_phone1;
-  var phone2 = req.body.seller_phone2;
-  var phone3 = req.body.seller_phone3;
-  var SELLER_PHONE = phone1+phone2+phone3;
-  var SELLER_ADDRESS = req.body.SELLER_ADDRESS;
-  console.log(req.files);
-  var SELLER_IMG = req.files.img.name;
+    var datas = [team_id, team_name, team_pass,  team_genre, team_intro, team_mail, team_phone, etc];
 
-  console.log(req.files.img);
-  console.log(req.files.img.name);
+    console.log('datas : ' + datas);
+    pool.getConnection(function (err, connection) {
+        var sqlForInsertMember = "insert into team(team_id, team_name, team_pass, team_genre, team_intro, team_mail,team_phone, etc) values(?,?,?,?,?,?,?,?)";
+        connection.query(sqlForInsertMember, datas, function (err, rows) {
+            if (err){
+                console.error("err : " + err);
+                res.send("<script>alert('이미 관리하는 공연팀이 존재합니다.');history.back();</script>")
+            }else{
+                console.log("rows: " + JSON.stringify(rows));
 
-  fs.readFile(req.files.img.path, function(err, data){
-    var filepath = './public/images/업소 대표사진/'+SELLER_TYPE+'/'+req.files.img.name;
-    console.log(filepath);
-    fs.writeFile(filepath,data,function(err){
-      if(err) console.error("err : " + err);
-    });
-  });
-
-  var datas = [SELLER_ID, SELLER_PASSWD, SELLER_TYPE, SELLER_NAME, SELLER_TELL, SELLER_PHONE, SELLER_ADDRESS, SELLER_IMG];
-
-  pool.getConnection(function (err, connection)
-  {
-    var sqlForInsertMember = "insert into seller(seller_id, seller_passwd, seller_type, seller_name, seller_tell, seller_phone, seller_addr, seller_img) values(?,?,?,?,?,?,?,?)";
-    connection.query(sqlForInsertMember, datas, function(err, rows){
-        if(err) console.error("err : " + err);
-        console.log("rows: " + JSON.stringify(rows));
-
-        res.redirect('/ceo')
-        connection.release();
-      });
+                res.redirect('/ceo')
+                connection.release();
+            }
+        });
     });
 });
 

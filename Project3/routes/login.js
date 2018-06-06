@@ -34,8 +34,10 @@ router.post('/', function(req, res)
       var cnt = rows[0].cnt;
       if(cnt == 1){
         req.session.user = id;
-        console.log('Login success' + req.sessionID);
-        res.redirect('/'); //main page
+        console.log('Login success : ' +req.session.user);
+        req.session.save(function(){
+            res.redirect('/'); //main page
+        });
       }else {
         console.log('failed');
         res.send("<script>alert('아이디 혹은 비밀번호를 다시 확인해주세요');history.back();</script>")

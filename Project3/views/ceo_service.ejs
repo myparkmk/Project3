@@ -46,21 +46,22 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="/ceo_sales">내 업소 관리</a></li>
+        <li><a href="/ceo_sales">내 공연팀 관리</a></li>
         <li><a href="/ceo_service">서비스 소개</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
       <%
       if(session.user==undefined)
       {
       %>
       <li><a href='/ceo_login'><span class="glyphicon glyphicon-log-in"></span>로그인</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
       <%
       }
       else{
       %>
-      <li><a href='/ceo_login'><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
+          <li><a href='/ceo_signup'><span class="glyphicon glyphicon-log-in"></span>공연팀 등록</a></li>
+          <li><a href='/ceo_login'><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
       <%
       }
       %>
@@ -108,7 +109,7 @@
     </a>
 </div>
 
- <img class="img-responsive center-block" src="/images/service_intro.jpg" alt="logo">
+ <img class="img-responsive center-block" src="/images/Service_intro.jpg" alt="logo">
 
 <footer class="container-fluid text-left">
   <p>Software Engineering Project </p>
