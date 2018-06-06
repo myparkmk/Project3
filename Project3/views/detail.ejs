@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LINKES</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<header>
+    <nav>
+        <div class="text-right">
+            <%
+            if(session.user==undefined)
+            {
+            %>
+            <div class="btn-group" style="background-color:white-space">
+                <div col-md-3>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" onclick="location.href='/login';">로그인</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/signup';">회원가입</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/service';">고객센터</button>
+                        </span>
+                </div>
+            </div>
+            <%
+            }
+            else{
+            %>
+            <div class="btn-group" style="background-color:white-space">
+                <div col-md-3>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" onclick="location.href='/mypage/order_list';">마이페이지</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/login/logout';">로그아웃</button>
+                          <button type="button" class="btn btn-default" onclick="location.href='/service';">고객센터</button>
+                        </span>
+                </div>
+            </div>
+
+            <%
+            }
+            %>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <a href='/'>
+                <img class="img-responsive center-block" src="/images/main_logo.jpg" alt="logo">
+            </a>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div class="input-group srch">
+        <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연 장소를 입력해주세요 (읍/면/동/리)">
+        <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">찾기</button>
+            </span>
+
+        <input type="text" class="form-control" id="sch_kwd" style="ime-mode:inactive" onkeypress="evtKeyPress(event)" placeholder="공연팀 이름을 입력해주세요">
+        <span class="input-group-btn">
+              <button type="button" class="btn" onclick="fn_sch_kwd(); return false;">검색</button>
+            </span>
+    </div>
+</div>
+<br>
+<br>
+<br><br>
+
+<div class=container>
+    <div class="row">
+
+        <%
+        for(var i=0; i<1;i++)
+        {
+            var oneItem = rows[i];
+        %>
+            <div class="thumbnail">
+                <a href="/detail/<%=oneItem.show_name%>">
+                    <img src="<%=oneItem.show_img%>" alt="공연대표사진" width="600">
+                </a>
+                <div class="caption">
+                    <h4><%=oneItem.show_name%></h4>
+                    <p>
+                        장르 : <%=oneItem.show_genre%>
+                    </p>
+                    <p>
+                        장소 : <%=oneItem.show_place%>
+                    </p>
+                    <p>
+                        멤버 : <%=oneItem.show_member%>
+                    </p>
+                    <p>
+                        시작 : <%=oneItem.show_start%>
+                    </p>
+                    <p>
+                        종료 : <%=oneItem.show_end%>
+                    </p>
+                    <p>
+                        가격 : <%=oneItem.show_cost%>
+                    </p>
+                    <p>
+                        상세내용 : <%=oneItem.show_intro%>
+                    </p>
+                </div>
+            </div>
+        <%
+        }
+        %>
+    </div>
+    <form id="submit"  method='post'>
+        <table class="table table-striped" width="100">
+            <tr>
+                <td colspan="2">
+                    <center>
+                        <%
+                        if(session.user!=undefined)
+                        {
+                        %>
+                        <input type="submit" class="btn btn-success" id="Btnsubmit" name="submit" value="예약" onclick="click()">
+                        <script>
+                            function click() {
+                                alert("예약되었습니다. 첫 페이지로 이동합니다");
+                            }
+                        </script>
+                        <%
+                        }
+                        %>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<hr>
+
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Software Engineering Project </p>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        function toSNS(sns, strTitle, strURL) {
+            var snsArray = new Array();
+            var strMsg = strTitle + " " + strURL;
+            var image = "/images";
+
+            snsArray['twitter'] = "http://twitter.com/home?status=" + encodeURIComponent(strTitle) + ' ' + encodeURIComponent(strURL);
+            snsArray['facebook'] = "http://www.facebook.com/share.php?u=" + encodeURIComponent(strURL);
+            snsArray['band'] = "http://band.us/plugin/share?body=" + encodeURIComponent(strTitle) + "  " + encodeURIComponent(strURL) + "&route=" + encodeURIComponent(strURL);
+            snsArray['line'] = "http://line.me/R/msg/text/?" + encodeURIComponent(strTitle) + " " + encodeURIComponent(strURL);
+            snsArray['google'] = "https://plus.google.com/share?url=" + encodeURIComponent(strURL) + "&t=" + encodeURIComponent(strTitle);
+            window.open(snsArray[sns]);
+        }
+
+        function copy_clip(url) {
+            var IE = (document.all) ? true : false;
+            if (IE) {
+                window.clipboardData.setData("Text", url);
+                alert("이 글의 단축url이 클립보드에 복사되었습니다.");
+            } else {
+                temp = prompt("이 글의 단축url입니다. Ctrl+C를 눌러 클립보드로 복사하세요", url);
+            }
+        }
+    </script>
+    <div class="sns_wrap">
+        <a href="javascript:toSNS('facebook','공유제목!','http://localhost:3000')" title="페이스북으로 가져가기"><img src="/images/facebook.png"></a>
+        <a href="javascript:toSNS('twitter','공유제목!','http://localhost:3000')" title="트위터로 가져가기"><img src="/images/twitter.png"></a>
+        <a href="javascript:toSNS('line','공유제목!','http://localhost:3000')" title="라인으로 가져가기"><img src="/images/line.png"></a>
+        <a href="javascript:toSNS('band','공유제목!','http://localhost:3000')" title="밴드로 가져가기"><img src="/images/band.png"></a>
+        <a href="javascript:toSNS('google','공유제목!','http://localhost:3000')" title="구글플러스로 가져가기"><img src="/images/googleplus.png"></a>
+
+      <ul>
+        <li><input type="text" value="http://localhost:3000"><a href="javascript:copy_clip('http://localhost:3000')"><img src="/img/sns_btn.jpg" class="sns_btn"></a></li>
+      </ul>
+    </div>
+
+
+
+
+    <!-- /.row -->
+</footer>
+
+
+<!-- jQuery -->
+<script src="/bootstrap-3.3.6-dist/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+</div>
+</body>
+
+</html>
