@@ -1,5 +1,7 @@
 # Project3
 
+쇼핑몰 구현
+
 Leader 
 -------
 2013722076 Minkyu Park (myparkmk)
